@@ -40,7 +40,9 @@
             <Col :xs="24" :sm="12" :md="12" :lg="24" style="margin-top:10px;background: #fff">
             <choose-text style="margin: 20px;float: left;width: 200px" v-bind:style1="color" @getValue="unname" v-bind:style2="color1" v-bind:items="items"></choose-text>
             <Date-picker type="daterange" format="yyyy年MM月dd日" :options="options2" placement="bottom-end" placeholder="选择日期" style="width: 250px;margin:20px;float: right"></Date-picker>
+            <div>
             <column></column>
+            </div>
             </Col>
         </Row>
     </div>
@@ -56,8 +58,7 @@
     let spanValue='';
     export default {
         components: {
-            ChooseText,
-            DashChartLarge,SaleChart,Bar,Column},
+            ChooseText,DashChartLarge,SaleChart,Bar,Column},
         name: 'dashboard',
         data() {
             return {

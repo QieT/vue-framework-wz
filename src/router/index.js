@@ -51,9 +51,15 @@ export const asyncRouterMap = [
         hidden: false,
         children: [
             {path: '/dashboard', name: 'Dashboard', icon: 'speedometer', component: _import('Dashboard')},
-            {path: '/introduction', name: '介绍', icon: 'thumbsup', component: _import('Introduction')},
             {
-                path: '/components', name: 'component组件', redirect: '/components/buttons', icon: 'bookmark',
+                path: '/introduction',
+                name: '介绍',
+                icon: 'thumbsup',
+                component: _import('Introduction'),
+                meta: {role: ['admin']}
+            },
+            {
+                path: '/components', name: 'component组件', redirect: '/components/buttons',meta: {role: ['admin']}, icon: 'bookmark',
                 component: {
                     render(c) {
                         return c('router-view')
@@ -122,7 +128,11 @@ export const asyncRouterMap = [
                 ]
             },
             {
-                path: '/charts', name: 'echart图表', redirect: '/charts/shopchart', icon: 'pie-graph',
+                path: '/charts',
+                name: 'echart图表',
+                redirect: '/charts/shopchart',
+                icon: 'pie-graph',
+                meta: {role: ['admin']},
                 component: {
                     render(c) {
                         return c('router-view')
@@ -144,13 +154,41 @@ export const asyncRouterMap = [
                     {path: 'cakechart', name: '蛋糕销量图表', icon: 'ios-analytics', component: _import('charts/CakeChart')}
                 ]
             },
-            {path: '/table', name: '表格综合实例', icon: 'ios-paper', component: _import('Table'), meta: {role: ['developer']}},
-            {path: '/jsontree', name: 'JSON视图', icon: 'merge', component: _import('JsonTree')},
-            {path: '/tabledetail/:id', name: 'TableDetail', hidden: true, component: _import('TableDetail')},
-            {path: '/tinymce', name: '编辑器', icon: "android-document", component: _import('Tinymce')},
-            {path: '/markdown', name: 'Markdown', icon: "android-list", component: _import('Markdown'),meta: {role: ['admin']}},
             {
-                path: '/public', name: '公众号', redirect: '/public/scientificChildRearing/material', icon: "android-list", component: {
+                path: '/table',
+                name: '表格综合实例',
+                icon: 'ios-paper',
+                component: _import('Table'),
+                meta: {role: ['admin']}
+            },
+            {path: '/jsontree', name: 'JSON视图', icon: 'merge', component: _import('JsonTree'), meta: {role: ['admin']}},
+            {
+                path: '/tabledetail/:id',
+                name: 'TableDetail',
+                hidden: true,
+                component: _import('TableDetail'),
+                meta: {role: ['admin']}
+            },
+            {
+                path: '/tinymce',
+                name: '编辑器',
+                icon: "android-document",
+                component: _import('Tinymce'),
+                meta: {role: ['admin']}
+            },
+            {
+                path: '/markdown',
+                name: 'Markdown',
+                icon: "android-list",
+                component: _import('Markdown'),
+                meta: {role: ['admin']}
+            },
+            {
+                path: '/public',
+                name: '公众号',
+                redirect: '/public/scientificChildRearing/material',
+                icon: "android-list",
+                component: {
                     render(c) {
                         return c('router-view')
                     }
@@ -216,7 +254,8 @@ export const asyncRouterMap = [
                             }
                         },
                     },
-                    {path: 'foodMom', name: '辅食妈妈', icon: 'ios-analytics', component: {
+                    {
+                        path: 'foodMom', name: '辅食妈妈', icon: 'ios-analytics', component: {
                             render(c) {
                                 return c('router-view')
                             }

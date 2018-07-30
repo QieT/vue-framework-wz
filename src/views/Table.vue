@@ -18,7 +18,7 @@
                         <Button type="text" @click="upload(index)" :loading="loadingStatus">{{ loadingStatus ? '上传中' : '点击上传'}}
                         </Button>
                     </div>
-                    <Progress :percent="progresscount" :status="progresstatus" style="width=90%;vertical-align:middle"
+                    <Progress :percent="progresscount" :status="progresstatus" style="width:90%;vertical-align:middle"
                               v-if="progresshow">
                         <Icon type="checkmark-circled" v-if="progresscount==100"></Icon>
                         <span v-if="progresscount===100">上传成功</span>
