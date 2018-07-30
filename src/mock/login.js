@@ -1,35 +1,47 @@
 import { param2Obj } from 'utils';
 
 const userMap = {
-  admin: {
+    administrator: {
     role: ['admin'],
-    token: 'admin',
+    token: 'administrator',
     introduction: '我是超级管理员',
-    name: 'Super Admin',
+    name: '烟消云散',
+        password:'telecommunication',
     uid: '001'
   },
   editor: {
     role: ['editor'],
     token: 'editor',
     introduction: '我是编辑',
-    name: 'Normal Editor',
+      password:'telecommunication',
+      name: '且听吾言',
     uid: '002'
-
-
   },
   developer: {
-    role: ['develop'],
-    token: 'develop',
-    introduction: '我是开发',
-    name: '工程师小王',
+    role: ['developer'],
+    token: 'developer',
+      password:'telecommunication',
+      introduction: '我是开发',
+    name: '攻城狮郝力',
     uid: '003'
-  }
+  },
+    fallingDown: {
+        role: ['admin'],
+        password:'telecommunication',
+        token: 'fallingDown',
+        introduction: '我是超级管理员',
+        name: '一言不合',
+        uid: '004'
+    }
 }
 
 export default {
   loginByEmail: config => {
-    const { email } = JSON.parse(config.body);
-      return userMap[email.split('@')[0]];
+    const { email,password } = JSON.parse(config.body);
+    console.log({email,password});
+    if(userMap[email] && userMap[email].password===password) {
+        return userMap[email];
+    }
   },
   getInfo: config => {
     const { token } = param2Obj(config.url);

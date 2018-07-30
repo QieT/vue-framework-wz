@@ -1,7 +1,7 @@
 <template>
   <navbar>
     <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button" @click="mobileSidebarToggle">&#9776;</button>
-    <a class="navbar-brand" ></a>
+    <a class="navbar-brand" >北京雯思东方传媒科技有限公司</a>
     <ul class="nav navbar-nav d-md-down-none">
       <li class="nav-item">
         <a class="nav-link navbar-toggler sidebar-toggler"  @click="sidebarMinimize">&#9776;</a>
@@ -9,7 +9,7 @@
      
     </ul>
 
-    <ul class="nav navbar-nav d-md-down-none">
+    <ul class="nav navbar-nav d-md-down-none" style="display: none">
       
        <li class="nav-item header-item">
   
@@ -79,7 +79,7 @@
         <a href="javascript:void(0)">
            <span slot="button">
           <img src="static/img/avatars/6.jpg" class="img-avatar" alt="o">
-          <span class="d-md-down-none">admin</span>
+          <span class="d-md-down-none">{{name}}</span>
           </span>
         </a>
         <Dropdown-menu slot="list">
@@ -122,6 +122,12 @@ import navbar from './Navbar'
 
 export default {
   name: 'header',
+    data(){
+        console.log(this.$store);
+        return {
+          name: this.$store.getters.name
+      }
+    },
   components: {
     navbar,
     

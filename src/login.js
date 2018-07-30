@@ -6,7 +6,7 @@ import 'nprogress/nprogress.css'// Progress 进度条样式
 
 // permissiom judge
 function hasPermission(roles, permissionRoles) {
-  if (roles.indexOf('admin') >= 0) return true // admin权限 直接通过
+  if (roles && roles.indexOf('admin') >= 0) return true // admin权限 直接通过
   if (!permissionRoles) return true
   return roles.some(role => permissionRoles.indexOf(role) >= 0)
 }
@@ -19,7 +19,7 @@ router.beforeEach((to, from, next) => {
     if (to.path === '/login') {
       next({ path: '/' })
     } else {
-      if (store.getters.roles.length === 0) { // 判断当前用户是否已拉取完user_info信息
+      if (store.getters.roles && store.getters.roles.length === 0) { // 判断当前用户是否已拉取完user_info信息
         store.dispatch('GetInfo').then(res => { // 拉取user_info
           const roles = res.data.role
 

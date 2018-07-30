@@ -68,7 +68,6 @@ const user = {
       return new Promise((resolve, reject) => {
         loginByEmail(email, userInfo.password).then(response => {
           const data = response.data;
-          console.log(response.data);
           Cookies.set('Admin-Token', response.data.token);
           commit('SET_TOKEN', data.token);
           commit('SET_EMAIL', email);

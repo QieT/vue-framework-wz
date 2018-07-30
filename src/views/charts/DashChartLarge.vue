@@ -1,112 +1,97 @@
 <template>
+  <Row>
 
-  <Col :span="24" style="background-color:white">
-    <chart :options="option" class="echarts" id="chart" > </chart>
+    <Col :span="24" style="background-color:white;padding: 5%">
+    <div>
+      <chart :options="option" class="echarts"></chart>
+    </div>
+    </Col>
 
-  </Col>
-
+  </Row>
 </template>
 
 <style scoped>
-.echarts {
-  height: 400px;
-  width: 100%;
-
-}
-
+  .echarts {
+    height: 200px;
+    width: 100%;
+    border-radius: 25px;
+  }
 
 </style>
 
 <script>
+    var xData = function() {
+        var data = [];
+        for (var i = 1; i < 13; i++) {
+            data.push(i + "月份");
+        }
+        return data;
+    }();
 
 
+    export default {
+        data: function () {
+            let data = []
 
-
-export default {
-    mounted(){
-    },
-  data: function () {
-   
-    return {
-
-
-
-
-
-option :{
-   tooltip: {
-            trigger: 'axis'
-        },
-        xAxis: [
-            {
-                type: 'category',
-                boundaryGap: false,
-                data: ['1', '5', '10', '15', '20', '25', '31']
+            for (let i = 0; i <= 360; i++) {
+                let t = i / 180 * Math.PI
+                let r = Math.sin(2 * t) * Math.cos(2 * t)
+                data.push([r, i])
             }
-        ],
-        yAxis: [
-            {
-                name: '（单价）',
-                type: 'value',
-                max: 100
-            },
-            {
-                name: '（笔数）',
-                type: 'value',
-                max: 100
-            }
-        ],
-        series: [
-            {
-                name: '客单价',
-                type: 'line',
-                tooltip: {
-                    trigger: 'axis'
-                    // formatter: '{a} <br/>{b}日: {c}元'
-                },
-                smooth: true,
-                itemStyle: {
-                    normal: {
-                        color: 'rgba(2, 197, 233, 0.2)',
-                        lineStyle: {
-                            color: 'rgba(23, 107, 203, 0.2)'
-                        },
-                        areaStyle: {
-                            color: 'rgba(223, 147, 233, 0.2)'
+
+            return {
+
+
+
+                option : {
+                    color: ['#8C9EFF'],
+                    title: {
+                        text: '新增关注',
+                        textStyle:{
+                            fontWeight:'normal',
+                            fontSize:14,
+                            color:'#a6a6a6'
                         }
-                    }
-                },
-                data: [10, 12, 21, 54, 60, 80, 71]
-            },
-            {
-                name: '交易笔数',
-                type: 'line',
-                tooltip: {
-                    trigger: 'axis'
-                    // formatter: '{a} <br/>{b}日: {c}元'
-                },
-                yAxisIndex: 1,
-                smooth: true,
-                itemStyle: {
-                    normal: {
-                        color: 'rgba(2, 197, 233, 0.2)',
-                        lineStyle: {
-                            color: 'rgba(2, 197, 233, 0.2)'
-                        },
-                        areaStyle: {
-                            color: 'rgba(2, 197, 233, 0.2)'
+                    },
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {}
                         }
-                    }
-                },
-                data: [30, 32, 61, 24, 20, 90, 20]
+                    },
+                    grid: {
+                        left: '-7%',
+                        right: '4%',
+                        bottom: '0',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            show:false,
+                            type : 'category',
+                            boundaryGap : false,
+                            data : ['周一','周二','周三','周四','周五','周六','周日']
+                        }
+                    ],
+                    yAxis : {show:false},
+                    series : [
+                        {
+                            name:'邮件营销',
+                            type:'line',
+                            stack: '总量',
+                            areaStyle: {normal: {
+                                opacity:0.3
+                                }},
+                            data:[120, 132, 101, 134, 90, 230, 210]
+                        }
+                    ]
+                }
+
+
+
             }
-        ]
-}
-    
-
-
-
+        }
     }
-  }
-}
 </script>

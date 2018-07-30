@@ -1,9 +1,10 @@
 <template>
   <Row>
 
-  <Col :span="24">
+  <Col :span="24" style="background-color:white;padding: 5%">
+    <div>
     <chart :options="option" class="echarts"></chart>
-
+    </div>
   </Col>
 
   </Row>
@@ -11,7 +12,7 @@
 
 <style scoped>
 .echarts {
-  height: 500px;
+  height: 200px;
   width: 100%;
   border-radius: 25px;
 }
@@ -43,14 +44,17 @@ export default {
 
 
 option : {
+    color: ['#B388FF'],
     title: {
-        text: '堆叠区域图'
+        text: '首条访问量',
+        textStyle:{
+            fontWeight:'normal',
+            fontSize:14,
+            color:'#a6a6a6'
+        }
     },
     tooltip : {
         trigger: 'axis'
-    },
-    legend: {
-        data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
     },
     toolbox: {
         feature: {
@@ -58,64 +62,28 @@ option : {
         }
     },
     grid: {
-        left: '3%',
+        left: '-7%',
         right: '4%',
-        bottom: '3%',
+        bottom: '0',
         containLabel: true
     },
     xAxis : [
         {
+            show:false,
             type : 'category',
             boundaryGap : false,
             data : ['周一','周二','周三','周四','周五','周六','周日']
         }
     ],
-    yAxis : [
-        {
-            type : 'value'
-        }
-    ],
+    yAxis : {show:false},
     series : [
         {
+            smooth:true,
             name:'邮件营销',
             type:'line',
             stack: '总量',
             areaStyle: {normal: {}},
             data:[120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-            name:'联盟广告',
-            type:'line',
-            stack: '总量',
-            areaStyle: {normal: {}},
-            data:[220, 182, 191, 234, 290, 330, 310]
-        },
-        {
-            name:'视频广告',
-            type:'line',
-            stack: '总量',
-            areaStyle: {normal: {}},
-            data:[150, 232, 201, 154, 190, 330, 410]
-        },
-        {
-            name:'直接访问',
-            type:'line',
-            stack: '总量',
-            areaStyle: {normal: {}},
-            data:[320, 332, 301, 334, 390, 330, 320]
-        },
-        {
-            name:'搜索引擎',
-            type:'line',
-            stack: '总量',
-            label: {
-                normal: {
-                    show: true,
-                    position: 'top'
-                }
-            },
-            areaStyle: {normal: {}},
-            data:[820, 932, 901, 934, 1290, 1330, 1320]
         }
     ]
 }

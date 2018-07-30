@@ -3,21 +3,22 @@
     <div id="canvascontainer" ref='can'></div>
 
     <Form ref="loginForm" autoComplete="on" :model="loginForm" :rules="loginRules"  class="card-box login-form">
+        <div style="font-size: 20px;text-align: center;color: #fff;margin-bottom: 50px">北京雯思东方传媒科技有限公司</div>
         <Form-item prop="email">
-            <Input type="text" v-model="loginForm.email" placeholder="Username" autoComplete="on">
+            <Input type="text" v-model="loginForm.email" placeholder="用户名" autoComplete="on">
                 <Icon type="ios-person-outline" slot="prepend" ></Icon>
             </Input>
         </Form-item>
         <Form-item prop="password">
-            <Input type="password" v-model="loginForm.password" placeholder="Password" @keyup.enter.native="handleLogin">
+            <Input type="password" v-model="loginForm.password" placeholder="密码" @keyup.enter.native="handleLogin">
                 <Icon type="ios-locked-outline" slot="prepend"></Icon>
             </Input>
         </Form-item>
         <Form-item>
             <Button type="primary" @click="handleLogin('loginForm')" long>登录</Button>
         </Form-item>
-        <div class='tips'>admin账号为:admin@wz.com 密码123456</div>
-            <div class='tips'>editor账号:editor@wz.com 密码123456</div>
+        <!--<div class='tips'>admin账号为:admin@wz.com 密码123456</div>-->
+            <!--<div class='tips'>editor账号:editor@wz.com 密码123456</div>-->
            </Form>
 
     </div>
@@ -30,14 +31,14 @@
       name: 'login',
       data() {
         const validateEmail = (rule, value, callback) => {
-          if (!isWscnEmail(value)) {
-            callback(new Error('请输入正确的合法邮箱'));
-          } else {
+          // if (!isWscnEmail(value)) {
+          //   callback(new Error('请输入正确的合法邮箱'));
+          // } else {
             callback();
-          }
+          // }
         };
         const validatePass = (rule, value, callback) => {
-          if (value.length < 6) {
+          if (!value || value.length < 6) {
             callback(new Error('密码不能小于6位'));
           } else {
             callback();
@@ -45,8 +46,6 @@
         };
         return {
           loginForm: {
-            email: 'admin@wz.com',
-            password: ''
           },
           loginRules: {
             email: [
@@ -62,7 +61,7 @@
       },
        mounted () {
         container = document.createElement( 'div' );
-   this.$refs.can.appendChild( container );  
+   this.$refs.can.appendChild( container );
 
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
   camera.position.z = 1000;
@@ -73,16 +72,12 @@
 
   var PI2 = Math.PI * 2;
   var material = new THREE.ParticleCanvasMaterial( {
-
-    color: 0x0078de,
+    color: '#82B1FF',
     program: function ( context ) {
-
       context.beginPath();
       context.arc( 0, 0, 1, 0, PI2, true );
       context.fill();
-
     }
-
   } );
 
   var i = 0;
@@ -113,20 +108,22 @@ animate();
        },
       methods: {
         handleLogin() {
+            console.log(this.loginForm)
           this.$refs.loginForm.validate(valid => {
             if (valid) {
               this.loading = true;
-              this.$store.dispatch('LoginByEmail', this.loginForm).then(() => {
+              this.$store.dispatch('LoginByEmail', this.loginForm).then((res) => {
+                  console.log(res)
                 this.$Message.success('登录成功');
-                
+
                 this.loading = false;
                 this.$router.push({ path: '/' });
               }).catch(err => {
-                this.$message.error(err);
+                this.$Message.error('用户名或密码错误');
                 this.loading = false;
               });
             } else {
-              console.log('error submit!!');
+                this.$Message.error('异常');
               return false;
             }
           });
@@ -151,7 +148,7 @@ var windowHalfY = window.innerHeight / 2;
 
 function init() {
 
-  
+
 
 }
 

@@ -12,7 +12,7 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'sidebar',
   components: { SidebarItem },
-      computed: {
+    computed: {
         ...mapGetters([
           'siderbar_routers'
         ])
