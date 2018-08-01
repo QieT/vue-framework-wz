@@ -33,8 +33,23 @@ const userMap = {
         name: '一言不合',
         uid: '004'
     }
-}
-
+};
+const tableList =[
+    {title:'第一个菜单',
+    type:'url',
+        value:'http://www.baidu.com'
+    },
+    {title:'第一个菜单',
+        type:'url',
+        value:'http://www.baidu.com',
+        children:[
+            {title:'第一个菜单',
+                type:'reply',
+                value:'星分翼轸'
+            }
+        ]
+    }
+];
 export default {
   loginByEmail: config => {
     const { email,password } = JSON.parse(config.body);
@@ -51,5 +66,8 @@ export default {
       return Promise.reject('a');
     }
   },
+    findTableList: config => {
+      return tableList
+    },
   logout: () => 'success'
 };

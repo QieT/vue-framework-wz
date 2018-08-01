@@ -216,7 +216,27 @@ export const asyncRouterMap = [
                                 path: 'user',
                                 name: '用户管理',
                                 icon: 'stats-bars',
-                                component: _import('public/scientificChildRearing/user'),
+                                // component: _import('public/scientificChildRearing/user'),
+                                component: {
+                                    render(c) {
+                                        return c('router-view')
+                                    }
+                                },
+                                children:[
+                                    {
+                                        path: 'userList',
+                                        name: '用户列表',
+                                        icon: 'stats-bars',
+                                        component: _import('public/scientificChildRearing/user/userList'),
+                                        hidden: false,
+                                    },{
+                                        path: 'communication',
+                                        name: '评论管理',
+                                        icon: 'stats-bars',
+                                        component: _import('public/scientificChildRearing/user/communication'),
+                                        hidden: false,
+                                    }
+                                ]
                             },
                             {
                                 path: 'tab',

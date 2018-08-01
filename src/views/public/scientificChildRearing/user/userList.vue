@@ -43,7 +43,7 @@
 
 <script>
     var vue;
-    import service from '../../../utils/fetch';
+    import service from '../../../../utils/fetch';
     service.post('wins/activity.php?c=Test&a=request_test', {});
     $.ajax({
         url: 'https://www.win-east.cn/wins/activity.php?c=Test&a=request_test',
@@ -51,7 +51,7 @@
             console.log(res)
         }
     })
-    import expandRow from '../../table-expand.vue';
+    import expandRow from '../../../table-expand.vue';
     import axios from 'axios';
 
 
@@ -149,7 +149,7 @@
     export default {
         components: {expandRow},
 
-        name: 'material',
+        name: 'user',
         data() {
             return {
                 progresshow: false,
@@ -238,32 +238,21 @@
                 list_loadding: false,
                 columns7: [
                     {
-                        type: 'expand',
-                        width: "30",
-                        ellipsis: 'true',
-
-                        render: (h, params) => {
-                            return h(expandRow, {
-                                props: {
-                                    row: params.row
-                                }
-                            })
-                        }
-                    },
-                    {
                         title: '序号',
+                        align:'center',
                         key: 'number',
                         ellipsis: 'true',
                     },
                     {
                         title: '用户ID',
+                        align:'center',
                         ellipsis: 'true',
                         key: 'userId',
-
                     },
 
                     {
                         title: '性别',
+                        align:'center',
                         ellipsis: 'true',
                         key: 'sex',
                         render: (h, params) => {
@@ -278,6 +267,7 @@
                     },
                     {
                         title: '地区',
+                        align:'center',
                         ellipsis: 'true',
                         key: 'area'
                     },
@@ -285,26 +275,66 @@
                         title: '头像',
                         ellipsis: 'true',
                         key: 'headImg',
+                        align:'center',
+                        render: (h, params) => {
+                            const img = params.row.headImg;
+                            return h('img',{
+                                attrs:{
+                                    src:img
+                                }});
+                        }//render
                     },
                     {
                         title: '关注时间',
+                        align:'center',
                         ellipsis: 'true',
                         key: 'focusTime',
                     },
                     {
                         title: '备注',
+                        align:'center',
                         ellipsis: 'true',
                         key: 'remark',
                     },
                     {
                         title: '标签ID',
+                        align:'center',
                         ellipsis: 'true',
                         key: 'tabId',
                     },
                     {
                         title: '操作',
-                        key: 'action',
+                        align:'center',
                         ellipsis: 'true',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small',
+                                    },
+                                    style: {
+                                        marginRight: '5px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.$router.push({path: '/tabledetail/' + (((this.pageindex - 1) * 10) + params.index)})
+                                        }
+                                    },
+                                }, '查看标签'),
+                                h('Button', {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small',
+                                    },
+                                    on: {
+                                        click: () => {
+                                            alert(1)
+                                        }
+                                    }
+                                }, '备注')
+                            ]);
+                        }//render
                     },//{
                 ],//cloumn
             }//return

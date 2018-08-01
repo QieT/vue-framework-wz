@@ -2,9 +2,10 @@
     <Row>
 
         <Col :span="24" style="background-color:white;padding: 5%">
-        <div>
+        <div style="border-bottom: 1px solid #e8e8e8">
             <chart :options="option" class="echarts"></chart>
         </div>
+        共计 523.24元
         </Col>
 
     </Row>
@@ -46,7 +47,7 @@
                 option : {
                     color: ['#EF9A9A'],
                     title: {
-                        text: '新增关注',
+                        text: '本日已发出红包',
                         textStyle:{
                             fontWeight:'normal',
                             fontSize:14,

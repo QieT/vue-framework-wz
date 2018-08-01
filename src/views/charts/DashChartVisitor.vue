@@ -53,15 +53,12 @@ export default {
 
 
 option : {
-    backgroundColor: '#49586e',
     title: {
-        text: '注册资金',
-        x: '20%',
-        y: 'center',
+        text: '首条阅读量统计',
+        x: '5%',
         textStyle: {
             fontWeight: 'normal',
             fontSize: 20,
-             color: '#fff',
         }
     },
     tooltip: {
@@ -69,30 +66,29 @@ option : {
         trigger: 'item',
         formatter: "{b}: {c} ({d}%)"
     },
-    legend: {
-        orient: 'vertical',
-        right: '5%',
-         top: '25%',
-           textStyle: {
-            fontWeight: 'normal',
-            fontSize: 16,
-             color: '#fff',
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : true,
+            data : ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        }
+    ],
+    yAxis : {
+        type:'value',
+        axisLine:{
+            show:false
         },
-        data: ['<10w', '10w-50w', '50w-100w', '100w-500w', '>500w']
+        axisTick:{
+            show:false
+        }
     },
     series: [{
-        type: 'pie',
-        selectedMode: 'single',
-         center: ['30%', '50%'],
-        radius: ['50%', '80%'],
-        // color: ['#86D560', '#AF89D6', '#59ADF3', '#FF999A', '#FFCC67'],
-        color: ['#AF89D6', '#5ab6df', '#6a8bc0', '#4acacb', '#fe8676'],
-
+        type: 'bar',
+        color: ['#82B1FF'],
+        barWidth:'20%',
         label: {
             normal: {
-                position: 'inner',
                 formatter: '{d}%',
-
                 textStyle: {
                     color: '#fff',
                     fontWeight: 'bold',

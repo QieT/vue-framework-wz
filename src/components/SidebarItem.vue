@@ -6,36 +6,47 @@
                     <router-link tag="li" class="nav-item nav-dropdown"
                                  v-if="!item.hidden&&item.children&&item.children.length>0"
                                  :to="item.path+''+item.children[0].path" disabled>
-
-
                         <div class="nav-link nav-dropdown-toggle" @click="handleClick">
-                            <Icon :type="item.icon" color="#448AFF"/>
-                            {{ item.name}}
+                            <Icon type="ios-folder" color="#448AFF"/>
+                            {{item.name}}
                         </div>
                         <ul class="nav-dropdown-items">
                             <template v-for="child in item.children">
-                                <!-- <router-link :to="child.path+'/'+item.children[0].path" class="nav-link" ><i class="icon-puzzle"></i> {{ child.name}} </router-link> -->
                                 <router-link tag="li" :to="item.path+'/'+child.path+'/'+child.children[0].path" class="nav-item nav-dropdown"
                                              v-if="!child.hidden&&child.children">
                                     <div class="nav-link nav-dropdown-toggle" @click="handleClick">
-                                        <Icon :type="child.icon" color="#448AFF"/>
-                                        {{ child.name}}
+                                        <Icon type="ios-folder" color="#448AFF"/>
+                                        {{child.name}}
                                     </div>
                                     <ul class="nav-dropdown-items">
-                                        <li class="nav-item" v-for="children in child.children" v-if='!children.hidden'
-                                            @click="addActive">
-                                            <router-link
-                                                    :to="item.path+'/'+child.path+children.path+'/'+children.children[0].path"
-                                                    class="nav-link" v-if="!children.hidden&&children.children">
-                                                <Icon :type="children.icon" color="#448AFF"/>
-                                                {{ children.name}}
+                                        <template v-for="children in child.children">
+                                            <router-link tag="li" :to="item.path+'/'+child.path+'/'+children.path+children.children[0].path" class="nav-item nav-dropdown" v-if="!children.hidden&&children.children">
+                                                <div class="nav-link nav-dropdown-toggle" @click="handleClick">
+                                                    <Icon type="ios-folder" color="#448AFF"/>
+                                                    {{children.name}}
+                                                </div>
+                                                <ul class="nav-dropdown-items">
+                                                    <li class="nav-item" v-for="childrens in children.children" v-if='!childrens.hidden'
+ @click="addActive">
+                                                        <router-link :to="item.path+'/'+child.path+children.path+'/'+childrens.path+'/'+childrens.children[0].path"
+                                                                class="nav-link" v-if="!childrens.hidden&&childrens.children">
+                                                            <Icon :type="childrens.icon" color="#448AFF"/>
+                                                            {{childrens.name}}
+                                                        </router-link>
+                                                        <router-link :to="item.path+'/'+child.path+'/'+children.path+'/'+childrens.path" class="nav-link" v-else="!childrens.children">
+                                                            <Icon :type="childrens.icon" color="#448AFF"/>
+                                                            {{childrens.name}}
+                                                        </router-link>
+                                                    </li>
+                                                </ul>
                                             </router-link>
-                                            <router-link :to="item.path+'/'+child.path+'/'+children.path" class="nav-link"
-                                                         v-else="!children.children">
-                                                <Icon :type="children.icon" color="#448AFF"/>
-                                                {{ children.name}}
-                                            </router-link>
-                                        </li>
+                                            <li class="nav-item" v-else='!children.hidden' @click="addActive">
+                                                <router-link :to="item.path+'/'+child.path+'/'+children.path" class="nav-link">
+                                                    <Icon :type="children.icon" color="#448AFF"/>
+                                                    {{ children.name}}
+                                                </router-link>
+                                            </li>
+                                        </template>
                                     </ul>
                                 </router-link>
                                 <li class="nav-item" v-else='!child.hidden' @click="addActive">

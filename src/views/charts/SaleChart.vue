@@ -2,9 +2,10 @@
   <Row>
 
   <Col :span="24" style="background-color:white;padding: 5%">
-    <div>
+    <div style="border-bottom: 1px solid #e8e8e8">
     <chart :options="option" class="echarts"></chart>
     </div>
+    日访问量 1234
   </Col>
 
   </Row>

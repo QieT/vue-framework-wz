@@ -38,13 +38,25 @@
         </Row>
         <Row>
             <Col :xs="24" :sm="12" :md="12" :lg="24" style="margin-top:10px;background: #fff">
-            <choose-text style="margin: 20px;float: left;width: 200px" v-bind:style1="color" @getValue="unname" v-bind:style2="color1" v-bind:items="items"></choose-text>
-            <Date-picker type="daterange" format="yyyy年MM月dd日" :options="options2" placement="bottom-end" placeholder="选择日期" style="width: 250px;margin:20px;float: right"></Date-picker>
+            <choose-text style="margin: 20px;float: left;width: 200px" v-bind:style1="color" @getValue="unname"
+                         v-bind:style2="color1" v-bind:items="items"></choose-text>
+            <Date-picker type="daterange" format="yyyy年MM月dd日" :options="options2" placement="bottom-end"
+                         placeholder="选择日期" style="width: 250px;margin:20px;float: right"></Date-picker>
             <div>
-            <column></column>
+                <dash-chart-visitor></dash-chart-visitor>
             </div>
             </Col>
         </Row>
+        <Row>
+            <Col :xs="24" :sm="12" :md="12" :lg="24">
+            公众号涨粉情况
+            </Col>
+            <Col :xs="24" :sm="12" :md="12" :lg="24">
+            <Date-picker type="daterange" format="yyyy年MM月dd日" :options="options2" placement="bottom-end"
+                         placeholder="选择日期" style="width: 250px;margin:20px;float: right"></Date-picker>
+            </Col>
+            <Table></Table>
+        </row>
     </div>
 </template>
 
@@ -52,30 +64,33 @@
 
     import DashChartLarge from './charts/DashChartLarge';
     import SaleChart from './charts/SaleChart';
+    import DashChartVisitor from './charts/DashChartVisitor';
     import Column from './charts/Column';
     import Bar from './charts/Bar';
     import ChooseText from './components/ChooseText';
-    let spanValue='';
+
+    let spanValue = '';
     export default {
         components: {
-            ChooseText,DashChartLarge,SaleChart,Bar,Column},
+            ChooseText, DashChartLarge, SaleChart, Bar, Column, DashChartVisitor
+        },
         name: 'dashboard',
         data() {
             return {
-                color:{ color:'#000'},
-                color1:{color:'#00f'},
-                items:[{
-                    value:1,
-                    label:'今日'
-                },{
-                    value:2,
-                    label:'本周'
-                },{
-                    value:3,
-                    label:'本月'
-                },{
-                    value:4,
-                    label:'全年'
+                color: {color: '#000'},
+                color1: {color: '#00f'},
+                items: [{
+                    value: 1,
+                    label: '今日'
+                }, {
+                    value: 2,
+                    label: '本周'
+                }, {
+                    value: 3,
+                    label: '本月'
+                }, {
+                    value: 4,
+                    label: '全年'
                 }],
                 value1: 0,
                 value2: 0,
@@ -83,14 +98,14 @@
 
                 speed: 10000,
                 options2: {
-                    disabledDate (date) {
+                    disabledDate(date) {
                         const disabledDay = date.getDate();
                         return disabledDay === 15;
                     },
                     shortcuts: [
                         {
                             text: '最近一周',
-                            value () {
+                            value() {
                                 const end = new Date();
                                 const start = new Date();
                                 start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
@@ -100,7 +115,7 @@
                         },
                         {
                             text: '最近一个月',
-                            value () {
+                            value() {
                                 const end = new Date();
                                 const start = new Date();
                                 start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
@@ -109,7 +124,7 @@
                         },
                         {
                             text: '最近三个月',
-                            value () {
+                            value() {
                                 const end = new Date();
                                 const start = new Date();
                                 start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
@@ -121,7 +136,7 @@
             }
         },
         methods: {
-            unname(res){
+            unname(res) {
                 console.log(res)
             },
             test_logout() {
@@ -177,6 +192,7 @@
     p {
         margin: 12px
     }
+
     .state-info .panel .summary span {
         color: #49586e;
         font-size: 13px;

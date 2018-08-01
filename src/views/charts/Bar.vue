@@ -2,9 +2,11 @@
     <Row>
 
         <Col :span="24" style="background-color:white;padding: 5%">
-        <div>
+        <div style="border-bottom: 1px solid #e8e8e8">
             <chart :options="option" class="echarts"></chart>
         </div>
+
+        参加率 12%
         </Col>
 
     </Row>
@@ -84,7 +86,7 @@
                         {
                             name:'邮件营销',
                             type:'bar',
-                            barWidth:'30%',
+                            barWidth:'20%',
                             stack: '总量',
                             itemStyle: {normal: {
                                     borderRadius:0.3
